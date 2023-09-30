@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MetricsInterceptor } from './metrics.interceptor';
+import { LoggingInterceptor } from './logging.interceptor';
 
 @Module({
   imports: [
@@ -13,6 +14,10 @@ import { MetricsInterceptor } from './metrics.interceptor';
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: MetricsInterceptor,
