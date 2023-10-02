@@ -21,14 +21,13 @@ export class MetricsInterceptor implements NestInterceptor {
     const url = new URL(req.url, req.protocol + '://' + req.headers.host + '/');
     if (url.pathname !== '/metrics') {
       const end = this.duration.startTimer();
-      const close = () =>
+      res.on('finish', () =>
         end({
           route: url.pathname,
           code: res.statusCode,
           method: req.method,
-        });
-      res.on('close', close);
-      res.on('finish', close);
+        }),
+      );
     }
 
     return next.handle();
