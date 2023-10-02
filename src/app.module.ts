@@ -9,7 +9,7 @@ import { LoggingInterceptor } from './logging.interceptor';
 @Module({
   imports: [
     PrometheusModule.register({
-      defaultLabels: { app: 'nestjs-grafana' },
+      defaultLabels: { app: 'nestjs-grafana-stack' },
     }),
   ],
   controllers: [AppController],
