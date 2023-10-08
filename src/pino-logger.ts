@@ -4,40 +4,31 @@ import pino from 'pino';
 export class PinoLogger implements LoggerService {
   private logger = pino();
 
-  verbose(message: any, context?: string, ...args: any[]) {
-    this.logger.trace({ context }, message, ...args);
+  verbose(message: any, context?: string) {
+    this.logger.trace({ context }, message);
   }
 
-  debug(message: any, context?: string, ...args: any[]) {
-    this.logger.debug({ context }, message, ...args);
+  debug(message: any, context?: string) {
+    this.logger.debug({ context }, message);
   }
 
-  log(message: any, context?: string, ...args: any[]) {
-    this.logger.info({ context }, message, ...args);
+  log(message: any, context?: string) {
+    this.logger.info({ context }, message);
   }
 
-  warn(message: any, context?: string, ...args: any[]) {
-    this.logger.warn({ context }, message, ...args);
+  warn(message: any, context?: string) {
+    this.logger.warn({ context }, message);
   }
 
-  error(message: any, trace?: string, context?: string, ...args: any[]) {
-    this.logger.error({ context, trace }, message, ...args);
+  error(message: any, trace?: string, context?: string) {
+    this.logger.error({ context, trace }, message);
   }
 
   overrideNestLogger() {
-    Logger.verbose = (message: any, context?: string, ...args: any[]) =>
-      this.verbose({ context }, message, ...args);
-    Logger.debug = (message: any, context?: string, ...args: any[]) =>
-      this.debug({ context }, message, ...args);
-    Logger.log = (message: any, context?: string, ...args: any[]) =>
-      this.log({ context }, message, ...args);
-    Logger.warn = (message: any, context?: string, ...args: any[]) =>
-      this.warn({ context }, message, ...args);
-    Logger.error = (
-      message: any,
-      trace?: string,
-      context?: string,
-      ...args: any[]
-    ) => this.error({ context, trace }, message, ...args);
+    Logger.verbose = (message: any, context?: string) => this.verbose(message, context);
+    Logger.debug = (message: any, context?: string) => this.debug(message, context);
+    Logger.log = (message: any, context?: string) => this.log(message, context);
+    Logger.warn = (message: any, context?: string) => this.warn(message, context);
+    Logger.error = (message: any, trace?: string, context?: string) => this.error(message, trace, context);
   }
 }
