@@ -9,8 +9,7 @@ datasources:
     url: http://prometheus:9090
     basicAuth: false
     isDefault: false
-    version: 1
-    editable: false
+    readOnly: true
     jsonData:
       httpMethod: GET
   - name: Tempo
@@ -20,11 +19,19 @@ datasources:
     url: http://tempo:3200
     basicAuth: false
     isDefault: true
-    version: 1
-    editable: false
-    apiVersion: 1
+    readOnly: true
     uid: tempo
     jsonData:
       httpMethod: GET
       serviceMap:
         datasourceUid: prometheus
+  - uid: loki
+    orgId: 1
+    name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    basicAuth: false
+    isDefault: false
+    readOnly: true
+    jsonData: {}
