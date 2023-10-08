@@ -7,8 +7,9 @@ export class AppController {
 
   @Get('/')
   async getTimeout(): Promise<string> {
-    const timeout = await this.service.getTimeout();
-    return `Timeout: ${timeout}`;
+    const timeout1 = await this.service.getTimeout();
+    const timeout2 = await this.service.getTimeout();
+    return `Timeout: ${timeout1 + timeout2}`;
   }
 
   @Get('/list')
