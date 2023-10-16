@@ -7,6 +7,15 @@ x-logging: &loki-logging
 version: "3"
 
 services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - TEMPO_URL=http://tempo:4317
+    logging: *loki-logging
+
   prometheus:
     image: prom/prometheus:latest
     volumes:
