@@ -4,8 +4,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MetricsInterceptor } from './metrics.interceptor';
-import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingInterceptor, MetricsInterceptor } from './observability';
 import { configuration } from './config/configuration';
 
 @Module({

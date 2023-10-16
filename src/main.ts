@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
-import { PinoLogger } from './pino-logger';
-import { initTracer } from './tracing/tracer';
+import { initTracer, PinoLogger } from './observability';
 import { Configuration } from './config/configuration';
 
 async function bootstrap() {
