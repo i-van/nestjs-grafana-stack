@@ -1,13 +1,18 @@
 import { makeHistogramProvider, PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MetricsInterceptor } from './metrics.interceptor';
 import { LoggingInterceptor } from './logging.interceptor';
+import { configuration } from './config/configuration';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
     PrometheusModule.register({
       defaultLabels: { app: 'nestjs-grafana-stack' },
     }),
