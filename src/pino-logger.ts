@@ -2,7 +2,12 @@ import { Logger, LoggerService } from '@nestjs/common';
 import pino from 'pino';
 
 export class PinoLogger implements LoggerService {
-  private logger = pino();
+  private logger = pino({
+    timestamp: pino.stdTimeFunctions.isoTime,
+    formatters: {
+      level: (level) => ({ level }),
+    },
+  });
 
   verbose(message: any, context?: string) {
     this.logger.trace({ context }, message);
