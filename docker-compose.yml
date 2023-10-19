@@ -14,6 +14,11 @@ services:
     environment:
       - PORT=3000
       - TEMPO_URL=http://tempo:4317
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
     logging: *loki-logging
 
   prometheus:

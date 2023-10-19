@@ -16,4 +16,9 @@ export class AppController {
   async getList(): Promise<number[]> {
     return this.service.getList();
   }
+
+  @Get('/health')
+  healthCheck() {
+    return { status: 'ok' };
+  }
 }
