@@ -1,5 +1,5 @@
 import { trace } from '@opentelemetry/api';
-import { NodeTracerProvider, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-node';
+import { BatchSpanProcessor, NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { Resource } from '@opentelemetry/resources';
@@ -34,7 +34,7 @@ export const initTracer = (config: Configuration['tracing']): void => {
   });
 
   const traceExporter = new OTLPTraceExporter({ url: config.tempoUrl });
-  provider.addSpanProcessor(new SimpleSpanProcessor(traceExporter));
+  provider.addSpanProcessor(new BatchSpanProcessor(traceExporter));
   provider.register();
 };
 
